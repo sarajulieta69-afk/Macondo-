@@ -1,131 +1,51 @@
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Adivinanzas de Macondo</title>
-<style>
-body {
-  margin: 0;
-  padding: 20px;
-  font-family: Georgia, serif;
-  background: #fff8e7;
-  color: #513d2c;
-  text-align: center;
-}
-h1 { color: #b78113; }
-.card {
-  max-width: 450px;
-  margin: 25px auto;
-  padding: 25px;
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 4px 15px #d9c69c;
-}
-.mariposa { font-size: 35px; }
-button {
-  display: block;
-  width: 100%;
-  margin-top: 12px;
-  padding: 12px;
-  border: none;
-  border-radius: 12px;
-  background: #f1d36c;
-  color: #513d2c;
-  font-size: 16px;
-  cursor: pointer;
-}
-button:hover { background: #e9c34c; }
-.pista, .respuesta {
-  display: none;
-  margin-top: 15px;
-  padding: 12px;
-  background: #fff4c9;
-  border-radius: 10px;
-}
-</style>
-</head>
-<body>
-
-<div class="mariposa">🦋 🌼 🦋</div>
-<h1>¿Quién soy?</h1>
-<p>Adivinanzas de <i>Cien años de soledad</i></p>
-<p>¡Descubre los secretos de Macondo!</p>
-
-<div id="juego"></div>
-
-<script>
 const preguntas = [
 {
-  pregunta: "Fundé Macondo y siempre tuve curiosidad por la ciencia y los inventos. ¿Quién soy?",
-  pistas: ["Soy el padre de una gran familia.", "Mi apellido es Buendía."],
+  pregunta: "Intenté descifrar los secretos del mundo mediante experimentos e inventos, pero terminé alejándome de la realidad. Fui el origen de una estirpe condenada a repetirse. ¿Quién soy?",
+  pistas: [
+    "Mi obsesión por la alquimia y los inventos me llevó a aislarme.",
+    "Fundé Macondo y fui esposo de Úrsula Iguarán."
+  ],
   respuesta: "José Arcadio Buendía"
 },
 {
-  pregunta: "Fui una mujer fuerte que cuidó de mi familia durante muchos años. ¿Quién soy?",
-  pistas: ["Soy esposa de José Arcadio Buendía.", "Mi nombre empieza por Ú."],
+  pregunta: "Aunque el tiempo parecía pasar para todos, yo permanecí como una fuerza constante dentro de una familia marcada por el destino. Mi longevidad me permitió ver repetirse sus errores. ¿Quién soy?",
+  pistas: [
+    "Mi vida estuvo ligada a la crianza de varias generaciones de los Buendía.",
+    "Soy la esposa de José Arcadio Buendía y luché por mantener unida a la familia."
+  ],
   respuesta: "Úrsula Iguarán"
 },
 {
-  pregunta: "Soy un gitano que lleva inventos y dejo unos misteriosos manuscritos. ¿Quién soy?",
-  pistas: ["Visito Macondo.", "Mis escritos contienen secretos sobre el destino de los Buendía."],
+  pregunta: "Llegué desde fuera del pueblo trayendo objetos que parecían desafiar lo conocido. Dejé un legado escrito cuyo significado solo podría comprenderse plenamente cuando llegara el momento indicado. ¿Quién soy?",
+  pistas: [
+    "Mis conocimientos y mis visitas despiertan la curiosidad de José Arcadio Buendía.",
+    "Soy el gitano que escribe los manuscritos descifrados por Aureliano Babilonia."
+  ],
   respuesta: "Melquíades"
 },
 {
-  pregunta: "Soy un pueblo lleno de historias extraordinarias donde vive la familia Buendía. ¿Qué lugar soy?",
-  pistas: ["Soy un lugar imaginario.", "Mi nombre empieza por M."],
+  pregunta: "Nací como un lugar apartado del mundo, pero terminé convertido en el escenario de acontecimientos extraordinarios. Mi historia parece avanzar y retroceder al mismo tiempo, como si el destino ya estuviera escrito. ¿Qué soy?",
+  pistas: [
+    "Mi fundador soñó con una ciudad de paredes de hielo.",
+    "Soy el pueblo ficticio creado por Gabriel García Márquez donde vive la familia Buendía."
+  ],
   respuesta: "Macondo"
 },
 {
-  pregunta: "Soy un insecto que vuela, tengo alas amarillas y aparezco relacionado con Mauricio Babilonia. ¿Qué soy?",
-  pistas: ["Tengo alas.", "Mi color recuerda al sol y soy una mariposa."],
+  pregunta: "Mi presencia anunciaba un amor que no podía pasar inadvertido. No hablaba ni tomaba decisiones, pero mi aparición seguía a un hombre y revelaba su pasión. ¿Qué soy?",
+  pistas: [
+    "Mi color es el mismo que el de muchos girasoles.",
+    "Acompaño a Mauricio Babilonia y estoy relacionada con su amor por Meme."
+  ],
   respuesta: "Las mariposas amarillas"
 },
 {
-  pregunta: "Hice que los habitantes de Macondo dejaran de dormir y después comenzaran a olvidar. ¿Qué soy?",
-  pistas: ["Soy una enfermedad extraña.", "Mi nombre está relacionado con no poder dormir."],
+  pregunta: "Mi llegada alteró la vida cotidiana de un pueblo: primero desapareció una necesidad natural y después surgió el peligro de olvidar hasta el nombre de las cosas. ¿Qué soy?",
+  pistas: [
+    "Los habitantes intentaron combatir mis efectos colocando etiquetas a los objetos.",
+    "Soy una enfermedad que provoca insomnio y pérdida de memoria."
+  ],
   respuesta: "La peste del insomnio"
 }
 ];
-
-const juego = document.getElementById("juego");
-
-preguntas.forEach((p, i) => {
-  const card = document.createElement("div");
-  card.className = "card";
-  card.innerHTML = `
-    <h2>Adivinanza ${i + 1}</h2>
-    <p>${p.pregunta}</p>
-    <button class="pistaBtn">💡 Dame una pista</button>
-    <div class="pista"></div>
-    <button class="respuestaBtn">💛 Revelar respuesta</button>
-    <div class="respuesta"></div>
-  `;
-
-  let nivel = 0;
-  const pista = card.querySelector(".pista");
-  const respuesta = card.querySelector(".respuesta");
-
-  card.querySelector(".pistaBtn").onclick = () => {
-    pista.style.display = "block";
-    if (nivel < p.pistas.length) {
-      pista.textContent = "Pista " + (nivel + 1) + ": " + p.pistas[nivel];
-      nivel++;
-    } else {
-      pista.textContent = "¡Ya tienes todas las pistas! Intenta adivinar.";
-    }
-  };
-
-  card.querySelector(".respuestaBtn").onclick = () => {
-    respuesta.style.display = "block";
-    respuesta.textContent = "Respuesta: " + p.respuesta;
-  };
-
-  juego.appendChild(card);
-});
-</script>
-
-</body>
-</html>
-
